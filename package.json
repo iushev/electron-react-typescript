@@ -4,6 +4,7 @@
   "description": "Electron React Typescript",
   "main": "./build/index.js",
   "scripts": {
+    "postinstall": "npm i --prefix \"./renderer\"",
     "dev:main": "NODE_ENV=development tsc -p ./main -w --sourceMap",
     "dev:renderer": "NODE_ENV=development BROWSER=none npm start --prefix \"./renderer\"",
     "dev:electron": "NODE_ENV=development DEBUG=electron:* ELECTRON_START_URL=http://localhost:3000 electron .",
