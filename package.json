@@ -1,0 +1,28 @@
+{
+  "name": "electron-react-ts",
+  "version": "0.0.1",
+  "description": "Electron React Typescript",
+  "main": "./build/index.js",
+  "scripts": {
+    "dev:main": "NODE_ENV=development tsc -p ./main -w --sourceMap",
+    "dev:renderer": "NODE_ENV=development BROWSER=none npm start --prefix \"./renderer\"",
+    "dev:electron": "NODE_ENV=development DEBUG=electron:* ELECTRON_START_URL=http://localhost:3000 electron .",
+    "dev": "concurrently --kill-others --success first -n main,renderer,electron  \"npm run dev:main\" \"npm run dev:renderer\" \"wait-on http://localhost:3000 && npm run dev:electron\"",
+    "build:main": "rimraf ./build &&  NODE_ENV=production tsc -p ./main",
+    "build:renderer": "NODE_ENV=production npm run build --prefix \"./renderer\" && mv ./renderer/build ./build/renderer",
+    "build": "npm run build:main && npm run build:renderer",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Unlicense",
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "electron": "^9.2.0",
+    "electron-devtools-installer": "^3.1.1",
+    "rimraf": "^3.0.2",
+    "wait-on": "^5.2.0"
+  },
+  "dependencies": {
+    "typescript": "^3.9.7"
+  }
+}
